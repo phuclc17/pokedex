@@ -1,0 +1,172 @@
+/* =============================================
+   CSS VARIABLES & RESET
+============================================= */
+:root {
+  --red: #e63946;
+  --red-dark: #c1121f;
+  --navy: #1d2d44;
+  --navy2: #243b55;
+  --card-bg: #1a2539;
+  --surface: #212f45;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #edf2ff;
+  --muted: #8899bb;
+  --gold: #ffd700;
+  --green: #52b788;
+  --radius: 14px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background: var(--navy);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND PATTERN */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      ellipse at 20% 10%,
+      rgba(230, 57, 70, 0.12) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 80%,
+      rgba(52, 183, 219, 0.08) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =============================================
+   GLOBAL ELEMENTS (Inputs, Buttons, Spinners, State Box)
+============================================= */
+input[type="text"] {
+  width: 100%;
+  padding: 11px 14px 11px 42px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--red);
+}
+input[type="text"]::placeholder {
+  color: var(--muted);
+}
+
+select {
+  padding: 11px 14px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+select:focus {
+  outline: none;
+  border-color: var(--red);
+}
+
+.btn {
+  padding: 11px 22px;
+  border: none;
+  border-radius: 10px;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--red), var(--red-dark));
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(230, 57, 70, 0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.5);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  background: var(--card-bg);
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+}
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--red);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.state-box {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+.state-box .icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+.state-box p {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.results-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.results-meta strong {
+  color: var(--text);
+}

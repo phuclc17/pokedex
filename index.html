@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PokéDex Collector</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Bangers&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <div class="logo-ball"></div>
+        Poké<span>Dex</span> Collector
+      </div>
+    </header>
+
+    <nav id="nav">
+      <button class="tab-btn active" data-target="search">🔍 Tìm kiếm</button>
+      <button class="tab-btn" data-target="collection">
+        📦 Bộ sưu tập <span class="tab-badge" id="col-badge">0</span>
+      </button>
+      <button class="tab-btn" data-target="stats">📊 Thống kê</button>
+    </nav>
+
+    <main>
+      <div id="tab-search" class="tab-content active-tab">
+        <div class="search-section">
+          <div class="search-row">
+            <div class="search-input-wrap">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Nhập tên thẻ... (Pikachu, Charizard...)"
+              />
+            </div>
+            <select id="type-filter">
+              <option value="">Tất cả Type</option>
+              <option value="Fire">🔥 Fire</option>
+              <option value="Water">💧 Water</option>
+              <option value="Grass">🌿 Grass</option>
+              <option value="Lightning">⚡ Lightning</option>
+              <option value="Psychic">🔮 Psychic</option>
+            </select>
+            <button class="btn btn-primary" id="btn-search">Tìm kiếm</button>
+          </div>
+        </div>
+        <div id="results-meta" class="results-meta" style="display: none"></div>
+        <div id="search-grid" class="card-grid">
+          <div class="state-box">
+            <div class="icon">🎴</div>
+            <p>
+              Nhập tên thẻ hoặc chọn type rồi nhấn <strong>Tìm kiếm</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-collection" class="tab-content" style="display: none">
+        <div class="stats-strip" id="col-stats-strip">
+          <div class="stat-card">
+            <div class="num" id="st-total">0</div>
+            <div class="lbl">Tổng thẻ</div>
+          </div>
+          <div class="stat-card">
+            <div class="num" id="st-rare">0</div>
+            <div class="lbl">Rare+</div>
+          </div>
+          <div class="stat-card">
+            <div class="num" id="st-types">0</div>
+            <div class="lbl">Loại type</div>
+          </div>
+          <div class="stat-card">
+            <div class="num" id="st-sets">0</div>
+            <div class="lbl">Series</div>
+          </div>
+        </div>
+        <div class="filter-bar">
+          <select id="f-rarity">
+            <option value="">Tất cả độ hiếm</option>
+            <option value="Common">Common</option>
+            <option value="Rare">Rare</option>
+          </select>
+          <select id="f-type">
+            <option value="">Tất cả type</option>
+            <option value="Fire">Fire</option>
+            <option value="Water">Water</option>
+          </select>
+          <button class="btn btn-ghost" id="btn-clear-filters">
+            ✕ Xóa lọc
+          </button>
+        </div>
+        <div id="col-grid" class="card-grid"></div>
+      </div>
+
+      <div id="tab-stats" class="tab-content" style="display: none">
+        <div class="stats-page">
+          <h2>📊 THỐNG KÊ BỘ SƯU TẬP</h2>
+          <div class="stats-strip" id="stats-strip2"></div>
+          <h2 style="margin-top: 28px; font-size: 1.2rem">Phân bổ theo Type</h2>
+          <div id="type-chart" class="type-chart"></div>
+          <h2 style="margin-top: 28px; font-size: 1.2rem">
+            Phân bổ theo Độ hiếm
+          </h2>
+          <div id="rarity-chart" class="rarity-grid"></div>
+        </div>
+      </div>
+    </main>
+
+    <div class="overlay" id="overlay">
+      <div class="modal" id="modal">
+        <div class="modal-top">
+          <button class="close-btn" id="btn-close-modal">✕</button>
+          <img id="m-img" class="modal-card-img" src="" alt="" />
+          <div class="modal-card-info">
+            <div class="modal-card-name" id="m-name"></div>
+            <div class="modal-set" id="m-set"></div>
+            <div class="detail-grid" id="m-details"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="m-add-btn">+ Thêm vào BST</button>
+          <button class="btn btn-ghost" id="btn-close-modal-footer">
+            Đóng
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,202 @@
+/* =============================================
+   HEADER & LOGO
+============================================= */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(29, 45, 68, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "Bangers", cursive;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+  color: var(--text);
+}
+.logo-ball {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #fff 50%, var(--red) 50%);
+  border: 3px solid #333;
+  position: relative;
+  animation: spin-hover 3s ease-in-out infinite;
+}
+@keyframes spin-hover {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+.logo-ball::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.logo span {
+  color: var(--red);
+}
+
+/* =============================================
+   NAV TABS
+============================================= */
+nav {
+  display: flex;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 64px;
+  z-index: 40;
+  overflow-x: auto;
+}
+nav::-webkit-scrollbar {
+  height: 0;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 14px 8px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: "Nunito", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tab-btn:hover {
+  color: var(--text);
+}
+.tab-btn.active {
+  color: var(--red);
+  border-bottom-color: var(--red);
+  background: rgba(230, 57, 70, 0.06);
+}
+
+.tab-badge {
+  background: var(--red);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 1px 7px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* =============================================
+   MAIN & SECTIONS
+============================================= */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.search-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.search-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.search-input-wrap {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+.search-input-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+}
+.stat-card .num {
+  font-family: "Bangers", cursive;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  color: var(--red);
+  line-height: 1;
+}
+.stat-card .lbl {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 700;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* RESPONSIVE LAYOUT */
+@media (max-width: 600px) {
+  header {
+    padding: 0 16px;
+  }
+  .logo {
+    font-size: 1.4rem;
+  }
+  main {
+    padding: 16px 12px;
+  }
+}
