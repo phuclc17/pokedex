@@ -31,7 +31,10 @@ function setupEventListeners() {
       e.currentTarget.classList.add("active");
       document.getElementById("tab-" + target).style.display = "block";
 
-      if (target === "collection") renderCollectionTab();
+      if (target === "collection") {
+        updateFilterDropdowns(); // Cập nhật dropdown lọc động trước khi render
+        renderCollectionTab();
+      }
       if (target === "stats") renderStatsPage(getCollection());
     });
   });
@@ -114,6 +117,7 @@ function setupEventListeners() {
         removeCardFromStore(id);
         showToast("🗑️ Đã xóa thẻ khỏi BST", "err");
         updateColBadge();
+        updateFilterDropdowns(); // Cập nhật lại dropdown lọc lỡ người dùng xóa thẻ cuối cùng của hệ
         renderCollectionTab();
       }
     }
@@ -171,6 +175,36 @@ async function handleSearch() {
       '<div class="state-box"><div class="icon">⚠️</div><p>Lỗi kết nối API. Vui lòng thử lại.</p></div>';
     showToast("Lỗi kết nối API", "err");
   }
+}
+
+// HÀM CẬP NHẬT DROPDOWN LỌC ĐỘNG DỰA TRÊN DỮ LIỆU THỰC TẾ
+function updateFilterDropdowns() {
+  const collection = getCollection();
+  const raritySelect = document.getElementById("f-rarity");
+  const typeSelect = document.getElementById("f-type");
+
+  // Lưu lại giá trị user đang chọn (nếu có) để không bị reset khi render lại
+  const currentRar = raritySelect.value;
+  const currentTyp = typeSelect.value;
+
+  // Lọc ra danh sách các độ hiếm và type unique (không trùng lặp)
+  const rarities = [
+    ...new Set(collection.map((c) => c.rarity).filter(Boolean)),
+  ].sort();
+  const types = [...new Set(collection.flatMap((c) => c.types || []))].sort();
+
+  // Tạo lại HTML cho dropdown
+  raritySelect.innerHTML =
+    '<option value="">Tất cả độ hiếm</option>' +
+    rarities.map((r) => `<option value="${r}">${r}</option>`).join("");
+
+  typeSelect.innerHTML =
+    '<option value="">Tất cả type</option>' +
+    types.map((t) => `<option value="${t}">${t}</option>`).join("");
+
+  // Phục hồi lại lựa chọn trước đó của user (nếu giá trị đó vẫn còn trong list)
+  if (rarities.includes(currentRar)) raritySelect.value = currentRar;
+  if (types.includes(currentTyp)) typeSelect.value = currentTyp;
 }
 
 // HÀM RENDER TAB BỘ SƯU TẬP
